@@ -8,25 +8,30 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            .top-img{
+                background-image: url(img/pop.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                height: 800px;
+                width: 100%;
+            }
+        </style>
     </head>
 
-    <body>
-        <div class="containser-fluid">
-            <div class="row">
-                <div class="col-lg-6 bg-info">
-                    
-                </div>
+    <body style="background-color: rgb(20, 32, 42);">
+        <div class="top-img w-50 float-left">
+            
+        </div>
 
-                <div class="col-lg-6 bg-primary">
-                    <div class="card w-50 mx-auto mt-5">
-                        <form action="" method="post">
-                        
-                            <a href="register.php" name="register" class="btn btn-primary form-control">Register</a>
+        <div class="w-50 float-right">
+            <div class="form-group w-50 mx-auto mt-5">
+                <form action="" method="post">
+                
+                    <a href="register.php" name="register" class="btn btn-primary form-control">Register</a>
 
-                            <a href='login.php' name="login" class="btn btn-outline-info form-control mt-3">Login</a>
-                        </form>
-                    </div>
-                </div>
+                    <a href='login.php' name="login" class="btn btn-outline-primary form-control mt-3">Login</a>
+                </form>
             </div>
         </div>
         <!-- Optional JavaScript -->

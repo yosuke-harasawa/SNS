@@ -1,14 +1,3 @@
-<?php
-    // include 'classes/SNS.php';
-
-    // if(isset($_POST['login'])){
-    //     $info = $_POST['info'];
-    //     $pword = $_POST['password'];
-
-    //     $SNS->login($info,$pword);
-    // }
-?>
-
 <!doctype html>
 <html lang="en">
     <head>
@@ -21,21 +10,16 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
 
-    <body>
-        <div class="container text-center mt-5">
-        <h1 class="font-weight-light">Login</h1>
-    
-            <div class="card w-50 mx-auto mt-3 bg-dark">
-                <div class="card-body text-light">
-                    <form action="action.php" method="post">
-                        <label for="">E-mail or PhoneNumber</label>
-                        <input type="text" name="info" class="form-control" required>
-                        <label for="">Password</label>
-                        <input type="password" name="password" class="form-control" required>
-                        <button type="submit" name="login" class="btn btn-primary my-3 ml-2">Login</button>
-                    </form>
-                </div>
-            </div>
+    <body style="background-color: rgb(21, 32, 43);">
+        <div class="container w-50 mx-auto text-center mt-5">
+            <h1 class="text-light font-weight-light">Login</h1>
+            <form action="action.php" method="post">
+                <!-- <label class="text-light" for="">E-mail or PhoneNumber</label> -->
+                <input type="text" name="info" class="form-control mt-4" placeholder="E-mail or PhoneNumber" required>
+                <!-- <label class="text-light" for="">Password</label> -->
+                <input type="password" name="password" class="form-control mt-4" placeholder="Password" required>
+                <button type="submit" name="login" class="btn btn-primary mt-4 ml-2 form-control" style="border-radius: 25px;">Login</button>
+            </form>
         </div>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -7,24 +7,24 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
+        <title>Title</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/eb83b1af77.js" crossorigin="anonymous"></script>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/eb83b1af77.js" crossorigin="anonymous"></script>
 
-    <style>
-        .side-bar{
-            position: fixed;
-        }
-    </style>
-  </head>
+        <style>
+            .side-bar{
+                position: fixed;
+            }
+        </style>
+    </head>
 
-  <body>
+    <body>
         <div class="side-bar col-3">
             <i class="fab fa-twitter fa-3x"></i>
             <form action="action.php" method="post">
@@ -35,12 +35,12 @@
                     </div>
                 </div>
             </form>
-            <a href="home.php" class="btn btn-outline-primary form-control my-2"><i class="fas fa-home fa-lg"></i> Home</a>
-            <a href="" class="btn btn-outline-primary form-control my-2"><i class="far fa-envelope fa-lg"></i> Message</a>
-            <a href="" class="btn btn-outline-primary form-control my-2"><i class="far fa-bookmark fa-lg"></i> Bookmarks</a>
-            <a href="my_profile.php" class="btn btn-outline-primary form-control my-2"><i class="far fa-user-circle fa-lg"></i> Profile</a>
-            <a href="setting.php" class="btn btn-outline-primary form-control my-2"><i class="fas fa-cog fa-lg"></i> Settings</a>
-            <a href="logout.php" class="btn btn-outline-primary form-control my-2"><i class="fas fa-key fa-lg"></i> Logout</a>
+            <a href="home.php" class="btn btn-outline-light form-control my-2"><i class="fas fa-home fa-lg"></i> Home</a>
+            <a href="" class="btn btn-outline-light form-control my-2"><i class="far fa-envelope fa-lg"></i> Message</a>
+            <a href="" class="btn btn-outline-light form-control my-2"><i class="far fa-bookmark fa-lg"></i> Bookmarks</a>
+            <a href="my_profile.php" class="btn btn-outline-light form-control my-2"><i class="far fa-user-circle fa-lg"></i> Profile</a>
+            <a href="setting.php" class="btn btn-outline-light form-control my-2"><i class="fas fa-cog fa-lg"></i> Settings</a>
+            <a href="logout.php" class="btn btn-outline-light form-control my-2"><i class="fas fa-key fa-lg"></i> Logout</a>
             <hr>
 
             <!-- Button trigger New Post modal -->
@@ -48,8 +48,8 @@
              New Post
             </button>
         </div>
-                    <!-- New Post Modal -->
-                    <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- New Post Modal -->
+            <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -64,14 +64,13 @@
                                 <textarea name="text" id="" cols="14" rows="10" class="form-control mt-2" placeholder="What's up?!"></textarea>
                                 <input type="file" name="picture">
                                 <br>
-                                <button type="submit" name="add_post" class="btn btn-primary float-right">Post</button>
+                                <button type="submit" name="add_post" class="btn btn-light float-right">Post</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
-  <body>
+    <body>
       
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -26,10 +26,14 @@
   <body>
       <div class="container-fluid mt-3">
           <div class="row">
+              <!-- SIDEMNUE -->
                 <?php include 'user_menu.php'; ?>
 
+                <!-- MAINVIEW -->
                 <div class="view_profile col-lg-6">
-                    <?php if(!empty($current_user['icon'])){
+                    <!-- USER ICON -->
+                    <?php 
+                        if(!empty($current_user['icon'])){
                         $img = $current_user['icon'];
                     ?>
                         <a href="upload.php?login_id=<?php echo $current_login_id; ?>" class="profile_icon">
@@ -41,15 +45,20 @@
                         </a>
                      <?php } ?>
                     <br>
+                    <!-- USER INFO -->
                     Username: <?php echo $current_user['username']; ?>
                     <br>
                     Bio: <?php echo $current_user['bio']; ?>
                     <br>
                     Location: <?php echo $current_user['location']; ?>
                     <br>
-                    Folowing: 
+                    <a href="my_following_list.php" style="color: black;">
+                        Folowing: <b><?php echo $SNS->displayFollowingNum($current_login_id) ?></b>
+                    </a> 
                     <br>
-                    Follwer: 
+                    <a href="my_follower_list.php" style="color: black;">
+                        Follower: <b><?php echo $SNS->displayFollowerNum($current_login_id) ?></b> 
+                    </a>
                     <br>
 
                     <!-- Button trigger profile modal -->
@@ -102,9 +111,11 @@
                         </div>
                     </div>
                     <hr>
+                    <!-- MY POST LIST -->
                     <?php 
                         $my_postlist = $SNS->displayMyPosts($current_login_id);
                         foreach($my_postlist as $row):
+                        $post_id = $row['post_id'];
                     ?>
                         <div class="card w-100 mt-3">
                             <div class="card-header">
@@ -118,51 +129,76 @@
                                 <?php echo $row['username']; ?>
                             </div>
 
-                            <div class="card-body">
-                                <?php echo $row['text']; ?>
+                            <a href="comment.php?post_id=<?php echo $post_id ?>" style="text-decoration: none;">
+                                <div class="card-body text-dark">
+                                    <?php echo $row['text']; ?>
+    
+                                    <?php if(!empty($row['picture'])): 
+                                        $img = $row['picture'];
+                                    ?>
+                                        <div class="card mt-2" style="border: 0;">
+                                            <img src="uploads/<?php echo $img; ?>" alt="" class="w-100 h-100" style="border-radius: 25px;">
+                                        </div>
+                                    <?php endif; ?>
+                                </div> 
+                            </a>
 
-                                <?php if(!empty($row['picture'])): 
-                                    $img = $row['picture'];
-                                ?>
-                                    <div class="card mt-2" style="border: 0;">
-                                        <img src="uploads/<?php echo $img; ?>" alt="" class="w-100 h-100" style="border-radius: 25px;">
-                                    </div>
-                                <?php endif; ?>
-                                
+                            <div class="card-footer bg-white py-0">
                                 <!-- SNS BUTTONS -->
-                                <div class="mt-2">
-                                    <!-- Button trigger comment modal -->
-                                    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
-                                        <i class="far fa-comment-alt fa-lg"></i>
-                                    </button>
-                                    <!-- Comment Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <img src="uploads/<?php echo $current_user['icon']; ?>" alt="" class="rounded-circle mr-2" style="width: 50px; height: 50px;">
-                                                    <form action="action.php" method="post" enctype="multipart/form-data">
-                                                        <textarea name="comment" id="" cols="14" rows="10" class="form-control mt-2" placeholder="Input your reply"></textarea>
-                                                        <input type="file" name="picture">
-                                                        <br>
-                                                        <button type="submit" name="reply" class="btn btn-info float-right mt-2">Reply</button>
-                                                    </form>
+                                <form action="action.php" method="post">
+                                    <div class="mt-2">
+                                        <!-- REPLY -->
+                                        <!-- Button trigger REPLY modal -->
+                                        <button type="button" class="btn" data-toggle="modal" data-target="#ModalID_<?php echo $post_id ?>">
+                                            <i class="far fa-comment-alt fa-lg"></i>
+                                        </button>
+                                        <?php echo $SNS->displayReplyNum($post_id) ?>
+                                        <!-- REPLY Modal -->
+                                        <div class="modal fade" id="ModalID_<?php echo $post_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <img src="uploads/<?php echo $current_user['icon']; ?>" alt="" class="rounded-circle mr-2" style="width: 50px; height: 50px;">
+                                                        <form action="action.php" method="post" enctype="multipart/form-data">
+                                                            <textarea name="comment" id="" cols="14" rows="10" class="form-control mt-2" placeholder="Input your reply"></textarea>
+                                                            <input type="file" name="picture">
+                                                            <br>
+                                                            <input type="hidden" name="post_id" value="<?php echo $row['post_id'] ?>">
+                                                            <button type="submit" name="reply_in_myprofile" class="btn btn-info float-right mt-2">Reply</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- RETWEET -->
+                                        <button name="retweet" class="btn"><i class="fas fa-retweet fa-lg"></i></button>
+                                        <!-- LIKE -->
+                                        <?php 
+                                            $rs = $SNS->likeRelationship($row['post_id'],$current_login_id);
+                                            if($rs == 'like'){
+                                            ?>
+                                            <button type="submit" name="like_in_myprofile" class="btn">
+                                                <i class="far fa-heart fa-lg"></i>
+                                            </button>
+                                            <?php echo $SNS->displayLikesNum($row['post_id']) ?>
+                                        <?php }else{ ?>
+                                            <button type="submit" name="unlike_in_myprofile" class="btn">
+                                                <i class="far fa-heart fa-lg"></i>
+                                            </button>
+                                            <?php echo $SNS->displayLikesNum($row['post_id']) ?>
+                                        <?php } ?>
+                                        <!-- SEND -->
+                                        <button name="send" class="btn"><i class="far fa-share-square fa-lg"></i></button>
+                                        <!-- BOOKMARK -->
+                                        <button name="bookmark" class="btn"><i class="far fa-bookmark fa-lg"></i></button>
+                                        <a href="delete_mypost.php?post_id=<?php echo $row['post_id']; ?>" class="btn"><i class="fas fa-trash-alt fa-lg text-danger"></i></a>
                                     </div>
-
-                                    <button name="retweet" class="btn"><i class="fas fa-retweet fa-lg"></i></button>
-                                    <button name="like" class="btn"><i class="far fa-heart fa-lg"></i></button>
-                                    <button name="send" class="btn"><i class="far fa-share-square fa-lg"></i></button>
-                                    <button name="bookmark" class="btn"><i class="far fa-bookmark fa-lg"></i></button>
-                                    <a href="delete_mypost.php?post_id=<?php echo $row['post_id']; ?>" class="btn"><i class="fas fa-trash-alt fa-lg text-danger"></i></a>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     <?php endforeach; ?>
