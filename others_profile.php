@@ -24,6 +24,7 @@
                 <?php include 'user_menu.php'; ?>
 
                 <div class="view-other-profile col-lg-6">
+                    <h1>Profile</h1>
                     <?php 
                         $user_id = $_GET['user_id'];
                         $other_user = $SNS->getOtherUser($user_id);
@@ -123,7 +124,6 @@
                                                             <input type="file" name="picture">
                                                             <br>
                                                             <input type="hidden" name="post_id" value="<?php echo $row['post_id'] ?>">
-                                                            <input type="hidden" name="commented_user_id" value="<?php echo $_GET['user_id'] ?>">
                                                             <button type="submit" name="reply_in_others_profile" class="btn btn-info float-right mt-2">Reply</button>
                                                         </form>
                                                     </div>

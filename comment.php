@@ -25,6 +25,7 @@
                 <!-- MAIN VIEW -->
                 <!-- CARD -->
                 <div class="view-post col-lg-6">
+                    <h1 class="">Post</h1>
                     <div class="card w-100 mt-3">
                         <?php
                             $paticular_post = $SNS->displayPaticularPost($_GET['post_id']);
@@ -112,7 +113,7 @@
                                                             <input type="file" name="picture">
                                                             <br>
                                                             <input type="hidden" name="post_id" value="<?php echo $row['post_id'] ?>">
-                                                            <button type="submit" name="reply" class="btn btn-info float-right mt-2">Reply</button>
+                                                            <button type="submit" name="reply_in_comment" class="btn btn-info float-right mt-2">Reply</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -125,9 +126,11 @@
                                             $rs = $SNS->likeRelationship($row['post_id'],$current_login_id);
                                             if($rs == 'like'){
                                         ?>
-                                            <button type="submit" name="like" class="btn"><i class="far fa-heart fa-lg"></i></button><?php echo $SNS->displayLikesNum($row['post_id']) ?>
+                                            <input type="hidden" name="post_id" value="<?php echo $row['post_id'] ?>">
+                                            <button type="submit" name="like_in_comment" class="btn"><i class="far fa-heart fa-lg"></i></button><?php echo $SNS->displayLikesNum($row['post_id']) ?>
                                         <?php }else{ ?>
-                                            <button type="submit" name="unlike" class="btn"><i class="far fa-heart fa-lg"></i></button><?php echo $SNS->displayLikesNum($row['post_id']) ?>
+                                            <input type="hidden" name="post_id" value="<?php echo $row['post_id'] ?>">
+                                            <button type="submit" name="unlike_in_comment" class="btn"><i class="far fa-heart fa-lg"></i></button><?php echo $SNS->displayLikesNum($row['post_id']) ?>
                                         <?php } ?>
                                         <!-- SEND -->
                                         <button name="send" class="btn"><i class="far fa-share-square fa-lg"></i></button>
@@ -194,7 +197,7 @@
                                         <img src="uploads/<?php echo $img; ?>" alt="" class="w-100 h-100" style="border-radius: 25px;">
                                     </div>
                                 <?php endif; ?>
-                                
+                                <!-- 問題 -->
                                 <!-- SNS BUTTONS -->
                                 <form action="action.php" method="post">
                                     <div class="mt-2">
@@ -203,7 +206,6 @@
                                         <button type="button" class="btn" data-toggle="modal" data-target="#modalID_<?php echo $post_id ?>">
                                             <i class="far fa-comment-alt fa-lg"></i>
                                         </button>
-                                        <?php echo $SNS->displayReplyAgainstReplyNum($reply_id) ?>
                                         <!-- REPLY Modal -->
                                         <div class="modal fade" id="modalID_<?php echo $post_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
@@ -219,8 +221,8 @@
                                                             <textarea name="comment" id="" cols="14" rows="10" class="form-control mt-2" placeholder="Input your reply"></textarea>
                                                             <input type="file" name="picture">
                                                             <br>
-                                                            <input type="hidden" name="post_id" value="<?php echo $row['post_id'] ?>">
-                                                            <button type="submit" name="reply" class="btn btn-info float-right mt-2">Reply</button>
+                                                            <input type="hidden" name="reply_id" value="<?php echo $row['reply_id'] ?>">
+                                                            <button type="submit" name="reply_against_reply" class="btn btn-info float-right mt-2">Reply</button>
                                                         </form>
                                                     </div>
                                                 </div>

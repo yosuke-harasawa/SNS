@@ -31,6 +31,7 @@
 
                 <!-- MAINVIEW -->
                 <div class="view_profile col-lg-6">
+                    <h1>Profile</h1>
                     <!-- USER ICON -->
                     <?php 
                         if(!empty($current_user['icon'])){

@@ -242,39 +242,6 @@
             }    
         }    
 
-        function insideProfileFollowUser($user_id,$followed_user_id){
-            $sql ="INSERT INTO follow(user_id,followed_user_id) VALUES($user_id,$followed_user_id)";
-            $result = $this->conn->query($sql);
-
-            if($result == FALSE){
-                echo "insert into follow failed";
-            }else{
-                header('location:others_profile.php?user_id='.$followed_user_id);
-            }    
-        }    
-
-        function insideMyFollowerListFollowUser($user_id,$followed_user_id){
-            $sql ="INSERT INTO follow(user_id,followed_user_id) VALUES($user_id,$followed_user_id)";
-            $result = $this->conn->query($sql);
-
-            if($result == FALSE){
-                echo "insert into follow failed";
-            }else{
-                header('location:my_follower_list.php?user_id='.$followed_user_id);
-            }    
-        }    
-
-        function insideOthersFollowingListFollowUser($user_id,$followed_user_id,$current_user_id){
-            $sql ="INSERT INTO follow(user_id,followed_user_id) VALUES($user_id,$followed_user_id)";
-            $result = $this->conn->query($sql);
-
-            if($result == FALSE){
-                echo "insert into follow failed";
-            }else{
-                header('location:others_following_list.php?user_id='.$current_user_id);
-            }    
-        }    
-
         function unfollowUser($user_id,$followed_user_id){
             $sql ="DELETE FROM follow WHERE user_id='$user_id' AND followed_user_id='$followed_user_id'";
             $result = $this->conn->query($sql);
@@ -285,6 +252,17 @@
                 header('location:user_result.php');
             }
         }
+
+        function insideProfileFollowUser($user_id,$followed_user_id){
+            $sql ="INSERT INTO follow(user_id,followed_user_id) VALUES($user_id,$followed_user_id)";
+            $result = $this->conn->query($sql);
+
+            if($result == FALSE){
+                echo "insert into follow failed";
+            }else{
+                header('location:others_profile.php?user_id='.$followed_user_id);
+            }    
+        }    
 
         function insideProfileUnfollowUser($user_id,$followed_user_id){
             $sql ="DELETE FROM follow WHERE user_id='$user_id' AND followed_user_id='$followed_user_id'";
@@ -308,6 +286,17 @@
             }
         }
 
+        function insideMyFollowerListFollowUser($user_id,$followed_user_id){
+            $sql ="INSERT INTO follow(user_id,followed_user_id) VALUES($user_id,$followed_user_id)";
+            $result = $this->conn->query($sql);
+
+            if($result == FALSE){
+                echo "insert into follow failed";
+            }else{
+                header('location:my_follower_list.php?user_id='.$followed_user_id);
+            }    
+        }    
+
         function insideMyFollowerListUnfollowUser($user_id,$followed_user_id){
             $sql ="DELETE FROM follow WHERE user_id='$user_id' AND followed_user_id='$followed_user_id'";
             $result = $this->conn->query($sql);
@@ -319,6 +308,17 @@
             }
         }
 
+        function insideOthersFollowingListFollowUser($user_id,$followed_user_id,$current_user_id){
+            $sql ="INSERT INTO follow(user_id,followed_user_id) VALUES($user_id,$followed_user_id)";
+            $result = $this->conn->query($sql);
+
+            if($result == FALSE){
+                echo "insert into follow failed";
+            }else{
+                header('location:others_following_list.php?user_id='.$current_user_id);
+            }    
+        }    
+
         function insideOthersFollowingListUnfollowUser($user_id,$followed_user_id,$current_user_id){
             $sql ="DELETE FROM follow WHERE user_id='$user_id' AND followed_user_id='$followed_user_id'";
             $result = $this->conn->query($sql);
@@ -327,6 +327,28 @@
                 echo "cannnot unfollow";
             }else{
                 header('location:others_following_list.php?user_id='.$current_user_id);
+            }
+        }
+
+        function insideOthersFollowerListFollowUser($user_id,$followed_user_id,$current_user_id){
+            $sql ="INSERT INTO follow(user_id,followed_user_id) VALUES($user_id,$followed_user_id)";
+            $result = $this->conn->query($sql);
+
+            if($result == FALSE){
+                echo "insert into follow failed";
+            }else{
+                header('location:others_follower_list.php?user_id='.$current_user_id);
+            }    
+        }    
+
+        function insideOthersFollowerListUnfollowUser($user_id,$followed_user_id,$current_user_id){
+            $sql ="DELETE FROM follow WHERE user_id='$user_id' AND followed_user_id='$followed_user_id'";
+            $result = $this->conn->query($sql);
+
+            if($result == FALSE){
+                echo "cannnot unfollow";
+            }else{
+                header('location:others_follower_list.php?user_id='.$current_user_id);
             }
         }
 
@@ -396,14 +418,14 @@
             }
         }
 
-        function insideOthersProfileAddReply($post_id,$user_id,$comment,$picture,$commented_user_id){
+        function insideOthersProfileAddReply($post_id,$user_id,$comment,$picture){
             $sql = "INSERT INTO replies(post_id,user_id,comment,picture) VALUES('$post_id','$user_id','$comment','$picture')";
             $result = $this->conn->query($sql);
 
             if($result == FALSE){
                 echo "insert into reply error";
             }else{
-                header('location:others_profile.php?user_id='.$commented_user_id);
+                header('location:comment.php?post_id='.$post_id);
             }
         }
 
@@ -414,7 +436,18 @@
             if($result == FALSE){
                 echo "insert into reply error";
             }else{
-                header('location:my_profile.php');
+                header('location:comment.php?post_id='.$post_id);
+            }
+        }
+
+        function insideCommentAddReply($post_id,$user_id,$comment,$picture){
+            $sql = "INSERT INTO replies(post_id,user_id,comment,picture) VALUES('$post_id','$user_id','$comment','$picture')";
+            $result = $this->conn->query($sql);
+
+            if($result == FALSE){
+                echo "insert into reply error";
+            }else{
+                header('location:comment.php?post_id='.$post_id);
             }
         }
 
@@ -457,9 +490,21 @@
         }
 
         //RETWEET
-
-
+        
+        
         //LIKE
+
+            function likeRelationship($post_id,$user_id){
+                $sql = "SELECT * FROM likes WHERE post_id = '$post_id' AND user_id = '$user_id'";
+                $result = $this->conn->query($sql);
+    
+                if($result->num_rows==1){
+                    return "unlike";
+                }else{
+                    return "like";
+                }
+            }
+
         function addLike($post_id,$user_id){
             $sql = "INSERT INTO likes(post_id,user_id) VALUES('$post_id','$user_id')";
             $result = $this->conn->query($sql);
@@ -493,16 +538,17 @@
             }
         }
 
-        function likeRelationship($post_id,$user_id){
-            $sql = "SELECT * FROM likes WHERE post_id = '$post_id' AND user_id = '$user_id'";
+        function insideCommentAddLike($post_id,$user_id){
+            $sql = "INSERT INTO likes(post_id,user_id) VALUES('$post_id','$user_id')";
             $result = $this->conn->query($sql);
 
-            if($result->num_rows==1){
-                return "unlike";
+            if($result == FALSE){
+                echo "insert into likes failed";
             }else{
-                return "like";
+                header('location:comment.php?post_id='.$post_id);
             }
         }
+
 
         function deleteLike($post_id,$user_id){
             $sql = "DELETE FROM likes WHERE post_id = '$post_id' AND user_id = '$user_id'";
@@ -534,6 +580,17 @@
                 echo "cannot delete like";
             }else{
                 header('location:my_profile.php');
+            }
+        }
+
+        function insideCommentDeleteLike($post_id,$user_id){
+            $sql = "DELETE FROM likes WHERE post_id = '$post_id' AND user_id = '$user_id'";
+            $result = $this->conn->query($sql);
+
+            if($result == FALSE){
+                echo "cannot delete like";
+            }else{
+                header('location:comment.php?post_id='.$post_id);
             }
         }
 

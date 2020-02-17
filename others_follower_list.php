@@ -55,7 +55,7 @@
                                         <form action="action.php" method="post">
                                             <input type="hidden" name="followed_user_id" value="<?php echo $row['user_id'] ?>">
                                             <input type="hidden" name="user_id" value="<?php echo $_SESSION['login_id'] ?>">
-                                            <button type="submit" name="follow_in_myfollower_list" class="btn btn-outline-primary" style="border-radius: 25px;">Follow</button>
+                                            <button type="submit" name="follow_in_others_follower_list" class="btn btn-outline-primary" style="border-radius: 25px;">Follow</button>
                                         </form>
                                     </div>
                                 <?php }elseif($rs == 'unfollow'){ ?>
@@ -63,7 +63,7 @@
                                         <form action="action.php" method="post">
                                             <input type="hidden" name="followed_user_id" value="<?php echo $row['user_id'] ?>">
                                             <input type="hidden" name="user_id" value="<?php echo $_SESSION['login_id'] ?>">
-                                            <button type="submit" name="unfollow_in_myfollower_list" class="btn btn-outline-primary" style="border-radius: 25px;">Unfollow</button>
+                                            <button type="submit" name="unfollow_in_others_follower_list" class="btn btn-outline-primary" style="border-radius: 25px;">Unfollow</button>
                                         </form>
                                     </div>
                                 <?php } ?>

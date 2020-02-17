@@ -105,7 +105,22 @@
         $current_user_id = $_POST['current_user_id'];
 
         $SNS->insideOthersFollowingListUnfollowUser($user_id,$followed_user_id,$current_user_id);
+
+    } elseif(isset($_POST['follow_in_others_follower_list'])){
+        $user_id = $_POST['user_id'];
+        $followed_user_id = $_POST['followed_user_id'];
+        $current_user_id = $_POST['current_user_id'];
+
+        $SNS->insideOthersFollowerListFollowUser($user_id,$followed_user_id,$current_user_id);
+
+    }elseif(isset($_POST['unfollow_in_others_follower_list'])){
+        $user_id = $_POST['user_id'];
+        $followed_user_id = $_POST['followed_user_id'];
+        $current_user_id = $_POST['current_user_id'];
+
+        $SNS->insideOthersFollowerListUnfollowUser($user_id,$followed_user_id,$current_user_id);
     }
+   
 
     //REPLY
     if(isset($_POST['reply'])){
@@ -121,9 +136,8 @@
         $user_id = $_SESSION['login_id'];
         $comment = $_POST['comment'];
         $picture = $_POST['picture'];
-        $commented_user_id = $_POST['commented_user_id'];
 
-        $SNS->insideOthersProfileAddReply($post_id,$user_id,$comment,$picture,$commented_user_id);
+        $SNS->insideOthersProfileAddReply($post_id,$user_id,$comment,$picture);
 
     }elseif(isset($_POST['reply_in_myprofile'])){
         $post_id = $_POST['post_id'];
@@ -132,7 +146,24 @@
         $picture = $_POST['picture'];
 
         $SNS->insideMyProfileAddReply($post_id,$user_id,$comment,$picture);
+
+    }elseif(isset($_POST['reply_in_comment'])){
+        $post_id = $_POST['post_id'];
+        $user_id = $_SESSION['login_id'];
+        $comment = $_POST['comment'];
+        $picture = $_POST['picture'];
+
+        $SNS->insideCommentAddReply($post_id,$user_id,$comment,$picture);
     }
+
+    // if(isset($_POST['reply_against_reply'])){
+    //     $reply_id = $_POST['reply_id'];
+    //     $user_id = $_SESSION['login_id'];
+    //     $comment = $_POST['comment'];
+    //     $picture = $_POST['picture'];
+
+    //     $SNS->addReplyAgainstReply($reply_id,$user_id,$comment,$picture);
+    // }
 
     // LIKE UNLIKE
     if(isset($_POST['like'])){
@@ -174,6 +205,19 @@
         $user_id = $_SESSION['login_id'];
 
         $SNS->insideMyprofileDeleteLike($post_id,$user_id);
+    }
+
+    if(isset($_POST['like_in_comment'])){
+        $post_id = $_POST['post_id'];
+        $user_id = $_SESSION['login_id'];
+
+        $SNS->insideCommentAddLike($post_id,$user_id);
+
+    }elseif(isset($_POST['unlike_in_comment'])){
+        $post_id = $_POST['post_id'];
+        $user_id = $_SESSION['login_id'];
+
+        $SNS->insideCommentDeleteLike($post_id,$user_id);
     }
 
 ?>
