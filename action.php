@@ -7,8 +7,8 @@
         $uname = $_POST['username'];
         $phone_num = $_POST['phone_number'];
         $email = $_POST['email'];
-        $pword = $_POST['password'];
-        $confirm_pword = $_POST['confirm_password'];
+        $pword = md5($_POST['password']);
+        $confirm_pword = md5($_POST['confirm_password']);
 
         $SNS->register($uname,$phone_num,$email,$pword,$confirm_pword);
     }
@@ -16,7 +16,7 @@
     //LOGIN
     if(isset($_POST['login'])){
         $info = $_POST['info'];
-        $pword = $_POST['password'];
+        $pword = md5($_POST['password']);
 
         $SNS->login($info,$pword);
     }
@@ -96,7 +96,7 @@
         $user_id = $_POST['user_id'];
         $followed_user_id = $_POST['followed_user_id'];
         $current_user_id = $_POST['current_user_id'];
-
+        
         $SNS->insideOthersFollowingListFollowUser($user_id,$followed_user_id,$current_user_id);
 
     }elseif(isset($_POST['unfollow_in_others_following_list'])){
@@ -112,13 +112,14 @@
         $current_user_id = $_POST['current_user_id'];
 
         $SNS->insideOthersFollowerListFollowUser($user_id,$followed_user_id,$current_user_id);
-
+       
     }elseif(isset($_POST['unfollow_in_others_follower_list'])){
         $user_id = $_POST['user_id'];
         $followed_user_id = $_POST['followed_user_id'];
         $current_user_id = $_POST['current_user_id'];
 
         $SNS->insideOthersFollowerListUnfollowUser($user_id,$followed_user_id,$current_user_id);
+
     }
    
 
@@ -156,14 +157,24 @@
         $SNS->insideCommentAddReply($post_id,$user_id,$comment,$picture);
     }
 
-    // if(isset($_POST['reply_against_reply'])){
-    //     $reply_id = $_POST['reply_id'];
-    //     $user_id = $_SESSION['login_id'];
-    //     $comment = $_POST['comment'];
-    //     $picture = $_POST['picture'];
+    if(isset($_POST['reply_to_reply'])){
+        $user_id = $_SESSION['login_id'];
+        $comment = $_POST['comment'];
+        $picture = $_POST['picture'];
+        $post_id = $_POST['post_id'];
+        $reply_id = $_POST['reply_id'];
 
-    //     $SNS->addReplyAgainstReply($reply_id,$user_id,$comment,$picture);
-    // }
+        $SNS->addRereply($user_id,$comment,$picture,$reply_id,$post_id);
+    }
+
+    //RETWEET
+    if(isset($_POST['retweet'])){
+        $user_id = $_SESSION['login_id'];
+        $post_id = $_POST['post_id'];
+
+        $SNS->addRetweet($user_id,$post_id);
+        $SNS->displayRetweet();
+    }
 
     // LIKE UNLIKE
     if(isset($_POST['like'])){
@@ -220,4 +231,49 @@
         $SNS->insideCommentDeleteLike($post_id,$user_id);
     }
 
+    //SETTING 
+    if(isset($_POST['change_phone'])){
+        $phone_num = $_POST['phone_number'];
+        $id = $_SESSION['login_id'];
+
+        $SNS->updateUserPhoneNum($phone_num,$id);
+    }
+
+    if(isset($_POST['change_email'])){
+        $email = $_POST['email'];
+        $id = $_SESSION['login_id'];
+
+        $SNS->updateUserEmail($email,$id);
+    }
+
+    if(isset($_POST['change_password'])){
+        $current_pword = md5($_POST['current_password']);
+        $new_pword = md5($_POST['new_password']);
+        $confirm_pword = md5($_POST['confirm_password']);
+        $id = $_POST['session_id'];
+
+        // echo $current_pword;
+        // echo "<br>";
+        // echo $new_pword;
+        // echo "<br>";
+        // echo $confirm_pword;
+        // echo "<br>";
+        // echo $id;
+        // echo "<br>";
+
+       
+        $SNS->changePassword($current_pword,$new_pword,$confirm_pword,$id);
+        // $row = $result->fetch_assoc();
+
+        // print_r($row);
+
+        // if($current_pword == $row['password']){
+        //     echo "wgood";
+
+        // }else{
+        //    echo "wrong current password";
+        // }
+
+        // $SNS->updateUserPassword($current_pword,$new_pword,$confirm_pword,$id);
+    }
 ?>

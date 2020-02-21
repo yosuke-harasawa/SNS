@@ -13,10 +13,14 @@
                 position: relative;
                 left: 360px;
             }
+            .user_icon:hover{
+            text-decoration: none;
+            opacity: 0.9;
+        }
         </style>    
     </head>
 
-    <body>
+    <body style="background-color: rgb(21, 32, 43);">
         <div class="container-fluid mt-3">
             <div class="row">
                 <!-- SIDEMENUE -->
@@ -25,26 +29,27 @@
                 <!-- MAIN VIEW -->
                 <!-- CARD -->
                 <div class="like-list col-lg-6">
+                    <h1 class="text-light">Liked by</h1>
                     <?php
                         $like_list = $SNS->displayLikeList($_GET['post_id']);
                         foreach($like_list as $row):
                     ?>
-                        <div class="card w-100 mt-3">
-                            <div class="card-header border-bottom-0">
+                        <div class="card w-100 mt-3" style="background-color: rgb(25, 39, 52); border-color: rgb(55, 68, 76);">
+                            <div class="card-header">
                                 <!-- USERICON & USERNAME -->
                                 <div class="float-left">
                                     <?php if($row['user_id'] == $current_login_id){ ?>
-                                        <a href="my_profile.php">
+                                        <a href="my_profile.php" class="user_icon">
                                             <img src="uploads/<?php echo $row['icon'] ?>" alt="" class="rounded-circle mr-2" style="width: 50px; height: 50px;">
                                         </a>
-                                        <a href="my_profile.php">
-                                            <?php echo $row['username'] ?>
+                                        <a href="my_profile.php" class="text-light"> 
+                                           <?php echo $row['username'] ?> 
                                         </a>
                                     <?php }else{ ?>
-                                        <a href="others_profile.php?user_id=<?php echo $row['user_id'] ?>">
+                                        <a href="others_profile.php?user_id=<?php echo $row['user_id'] ?>" class="user_icon">
                                             <img src="uploads/<?php echo $row['icon'] ?>" alt="" class="rounded-circle mr-2" style="width: 50px; height: 50px;">
                                         </a>
-                                        <a href="others_profile.php?user_id=<?php echo $row['user_id'] ?>">
+                                        <a href="others_profile.php?user_id=<?php echo $row['user_id'] ?>" class="text-light">
                                             <?php echo $row['username'] ?>
                                         </a>
                                     <?php } ?>

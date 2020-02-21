@@ -14,15 +14,20 @@
             position: relative;
             left: 360px;
         }
+        .user_icon:hover{
+            text-decoration: none;
+            opacity: 0.9;
+        }
         </style>
   </head>
 
-    <body>
+    <body style="background-color: rgb(21, 32, 43);">
         <div class="container-fluid mt-3">
             <div class="row">
                 <?php include 'user_menu.php'; ?>
 
                 <div class="view-searched-user col-lg-6">
+                    <h1 class="text-light">Users</h1>
                     <?php
                         $user_list = $_SESSION['searched_users'];
                         // print_r($user_list);
@@ -33,13 +38,13 @@
                             if($_SESSION['login_id'] != $random_user_id){ 
                         ?>
                         
-                            <div class="card my-2">
-                                <div class="card-header border-bottom-0">
+                            <div class="card mt-3" style="background-color: rgb(25, 39, 52); border-color: rgb(55, 68, 76);">
+                                <div class="card-header">
                                     <div class="float-left">
-                                        <a href="others_profile.php?user_id=<?php echo $row['user_id'] ?>">
+                                        <a href="others_profile.php?user_id=<?php echo $row['user_id'] ?>" class="user_icon">
                                             <img src="uploads/<?php echo $row['icon'] ?>" alt="" class="rounded-circle mr-2" style="width: 50px; height: 50px;">
                                         </a>
-                                        <a href="others_profile.php?user_id=<?php echo $row['user_id'] ?>">
+                                        <a href="others_profile.php?user_id=<?php echo $row['user_id'] ?>" class="text-light">
                                             <?php echo $row['username'] ?>
                                         </a>
                                     </div>

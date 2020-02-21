@@ -17,16 +17,16 @@
     </style>
   </head>
 
-  <body>
+  <body style="background-color: rgb(21, 32, 42);">
       <div class="container-fluid mt-3">
           <div class="row">
             <?php include 'user_menu.php'; ?>
 
-            <div class="upload col-lg-6">
+            <div class="upload col-lg-6 mt-3">
                 <form action="" method="post" enctype="multipart/form-data">
-                    <input type="file" name="profile_img">
+                    <input type="file" name="profile_img" style="color: lightslategrey;">
                     <br>
-                    <button type="submit" name="upload_icon" class="btn btn-primary">Upload</button>
+                    <button type="submit" name="upload_icon" class="btn btn-primary mt-3">Upload</button>
                 </form>
             </div>
           </div>

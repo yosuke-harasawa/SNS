@@ -15,16 +15,25 @@
                 position: relative;
                 left: 360px;
             }
+            .post-content:hover{
+                background-color: rgb(32, 48, 61);
+            }
+            .fa-color{
+                color: lightslategrey;
+            }
+            .like-color{
+                color: rgb(223, 35, 94);
+            }
         </style>
     </head>
 
-    <body>
+    <body style="background-color: rgb(21, 32, 43);">
         <div class="container-fluid mt-3">
             <div class="row">
                 <?php include 'user_menu.php'; ?>
 
-                <div class="view-other-profile col-lg-6">
-                    <h1>Profile</h1>
+                <div class="view-other-profile col-lg-6 text-light">
+                    <h1 class="text-light">Profile</h1>
                     <?php 
                         $user_id = $_GET['user_id'];
                         $other_user = $SNS->getOtherUser($user_id);
@@ -43,11 +52,11 @@
                     <br>
                     Location: <?php echo $other_user['location']; ?>
                     <br>
-                    <a href="others_following_list.php?user_id=<?php echo $user_id ?>" style="color: black;">
+                    <a href="others_following_list.php?user_id=<?php echo $user_id ?>" style="color: lightslategrey;">
                         Folowing: <b><?php echo $SNS->displayFollowingNum($user_id) ?></b>
                     </a> 
                     <br>
-                    <a href="others_follower_list.php?user_id=<?php echo $user_id ?>" style="color: black;">
+                    <a href="others_follower_list.php?user_id=<?php echo $user_id ?>" style="color: lightslategrey;">
                         Follower: <b><?php echo $SNS->displayFollowerNum($user_id) ?></b> 
                     </a>
                     <br>
@@ -76,8 +85,8 @@
                         foreach($others_postlist as $row):
                         $post_id = $row['post_id']
                     ?>
-                        <div class="card w-100 mt-3">
-                            <div class="card-header">
+                        <div class="card w-100 mt-3" style="background-color: rgb(25, 39, 52); border-color: rgb(55, 68, 76);">
+                            <div class="card-header" style="border-color:rgb(55, 68, 76);">
                                 <?php
                                     if(!empty($row['icon'])): 
                                         $icon = $row['icon'];
@@ -88,31 +97,35 @@
                                 <?php echo $row['username']; ?>
                             </div>
 
-                            <div class="card-body">
-                                <?php echo $row['text']; ?>
-                                <br>
-                                <?php if(!empty($row['picture'])): 
-                                    $img = $row['picture'];
-                                ?>
-                                    <div class="card mt-2" style="border: 0;">
-                                        <img src="uploads/<?php echo $img; ?>" alt="" class="w-100 h-100" style="border-radius: 25px;">
-                                    </div>
-                                <?php endif; ?>
-                                
+                            <a href="comment.php?post_id=<?php echo $post_id ?>" class="post-content" style="text-decoration: none;">
+                                <div class="card-body text-light">
+                                    <?php echo $row['text']; ?>
+                                    <br>
+                                    <?php if(!empty($row['picture'])): 
+                                        $img = $row['picture'];
+                                    ?>
+                                        <div class="card mt-2" style="border: 0;">
+                                            <img src="uploads/<?php echo $img; ?>" alt="" class="w-100 h-100" style="border-radius: 25px;">
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </a>
+
+                            <div class="card-footer py-0" style="color: lightslategrey; border-color:rgb(55, 68, 76);">
                                 <!-- SNS BUTTONS -->
                                 <form action="action.php" method="post">
                                     <div class="mt-2">
                                         <!-- REPLY -->
                                         <!-- Button trigger REPLY modal -->
                                         <button type="button" class="btn" data-toggle="modal" data-target="#ModalID_<?php echo $post_id ?>">
-                                            <i class="far fa-comment-alt fa-lg"></i>
+                                            <i class="far fa-comment-alt fa-lg fa-color"></i>
                                         </button>
                                         <?php echo $SNS->displayReplyNum($post_id) ?>
                                         <!-- REPLY Modal -->
                                         <div class="modal fade" id="ModalID_<?php echo $post_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
+                                                <div class="modal-content" style="background-color: rgb(21, 32, 43);">
+                                                    <div class="modal-header" style="border-color:rgb(55, 68, 76);">
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -121,17 +134,17 @@
                                                         <img src="uploads/<?php echo $current_user['icon']; ?>" alt="" class="rounded-circle mr-2" style="width: 50px; height: 50px;">
                                                         <form action="action.php" method="post" enctype="multipart/form-data">
                                                             <textarea name="comment" id="" cols="14" rows="10" class="form-control mt-2" placeholder="Input your reply"></textarea>
-                                                            <input type="file" name="picture">
+                                                            <input type="file" name="picture" class="mt-3">
                                                             <br>
                                                             <input type="hidden" name="post_id" value="<?php echo $row['post_id'] ?>">
-                                                            <button type="submit" name="reply_in_others_profile" class="btn btn-info float-right mt-2">Reply</button>
+                                                            <button type="submit" name="reply_in_others_profile" class="btn btn-primary float-right mt-2">Reply</button>
                                                         </form>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- RETWEET -->
-                                        <button name="retweet" class="btn"><i class="fas fa-retweet fa-lg"></i></button>
+                                        <button name="retweet" class="btn"><i class="fas fa-retweet fa-lg fa-color"></i></button>
                                         <!-- LIKE -->
                                         <?php 
                                             $rs = $SNS->likeRelationship($row['post_id'],$current_login_id);
@@ -139,23 +152,23 @@
                                          ?>
                                             <input type="hidden" name="liked_user_id" value="<?php echo $user_id ?>">
                                             <button type="submit" name="like_in_others_profile" class="like btn">
-                                                <i class="far fa-heart fa-lg"></i>
+                                                <i class="far fa-heart fa-lg fa-color"></i>
                                             </button>
                                             <?php echo $SNS->displayLikesNum($row['post_id']) ?>
                                         <?php }else{ ?>
                                             <input type="hidden" name="unliked_user_id" value="<?php echo $user_id ?>">
                                             <button type="submit" name="unlike_in_others_profile" class="unlike btn">
-                                                <i class="far fa-heart fa-lg"></i>
+                                                <i class="far fa-heart fa-lg like-color"></i>
                                             </button>
                                             <?php echo $SNS->displayLikesNum($row['post_id']) ?>
                                         <?php } ?>
                                         <!-- SEND -->
                                         <button name="send" class="btn">
-                                            <i class="far fa-share-square fa-lg"></i>
+                                            <i class="far fa-share-square fa-lg fa-color"></i>
                                         </button>
                                         <!-- BOOKMARK -->
                                         <button name="bookmark" class="btn">
-                                            <i class="far fa-bookmark fa-lg"></i>
+                                            <i class="far fa-bookmark fa-lg fa-color"></i>
                                         </button>
                                     </div>
                                 </form>

@@ -1,20 +1,10 @@
 <?php
-    // include 'classes/SNS.php';
-
-    // if(isset($_POST['register'])){
-    //     $uname = $_POST['username'];
-    //     $phone_num = $_POST['phone_number'];
-    //     $email = $_POST['email'];
-    //     $pword = $_POST['password'];
-    //     $confirm_pword = $_POST['confirm_password'];
-
-    //     if($pword == $confirm_pword){
-    //         $SNS->register($uname,$phone_num,$email,$pword);
-    //     }else{
-    //         $error_mssage = "* Confirm Password is wrong!!";
-    //     }
-    // }
+include 'classes/SNS.php';
+    if(!empty($_SESSION['login_id'])){
+        header('location:home.php');
+    }
 ?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -25,30 +15,27 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Knewave&display=swap" rel="stylesheet">
+        <style>
+            h1{
+                font-family: 'Knewave', cursive;
+                color: white;
+            }
+        </style>
     </head>
 
-    <body>
+    <body style="background-color: rgb(21, 32, 43);">
         <div class="container w-50 mx-auto mt-5">
-            <h1 class="text-center font-weight-lighter">Register</h1>
-
-            <div class="card">
-                <div class="card-body">
-                    <form action="action.php" method="post">
-                        <label for="">Username</label>
-                        <input type="text" name="username" class="form-control" required>
-                        <label for="">Phone Number</label>
-                        <input type="text" name="phone_number" class="form-control" required>
-                        <label for="">E-mail</label>
-                        <input type="text" name="email" class="form-control" required>
-                        <label for="">Password</label>
-                        <input type="password" name="password" class="form-control" required placeholder="Please enter more than 7 letters, and combine Alphabet and Number">
-                        <label for="">Confirm Password</label>
-                        <input type="password" name="confirm_password" class="form-control" required placeholder="Please enter same Password above">
-                        <br>
-                        <button type="submit" name="register" class="btn btn-primary float-right">Register</button>
-                    </form>
-                </div>
-            </div>
+            <h1 class="text-center text-light font-weight-light">Register</h1>
+            <form action="action.php" method="post">
+                <input type="text" name="username" class="form-control mt-4" placeholder="User Name" required>
+                <input type="text" name="phone_number" class="form-control mt-4" placeholder="Phone Number" required>
+                <input type="text" name="email" class="form-control mt-4" placeholder="E-mail" required>
+                <input type="password" name="password" class="form-control mt-4" placeholder="Password  *Please enter more than 7 letters, and combine Alphabet and Number" required>
+                <input type="password" name="confirm_password" class="form-control mt-4" placeholder="Confirm Password  *Please enter same Password above"required>
+                <br>
+                <button type="submit" name="register" class="btn btn-primary form-control" style="border-radius: 25px;">Register</button>
+            </form>
         </div>
       
 

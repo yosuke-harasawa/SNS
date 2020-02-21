@@ -1,3 +1,10 @@
+<?php
+include 'classes/SNS.php';
+    if(!empty($_SESSION['login_id'])){
+        header('location:home.php');
+    }
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -8,6 +15,7 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Knewave&display=swap" rel="stylesheet">
         <style>
             .top-img{
                 background-image: url(img/pop.jpg);
@@ -15,6 +23,10 @@
                 background-size: cover;
                 height: 800px;
                 width: 100%;
+            }
+            h1{
+                font-family: 'Knewave', cursive;
+                color: white;
             }
         </style>
     </head>
@@ -25,12 +37,12 @@
         </div>
 
         <div class="w-50 float-right">
+            <h1 class="text-center display-3 mt-5">What's up?!</h1>
             <div class="form-group w-50 mx-auto mt-5">
                 <form action="" method="post">
-                
-                    <a href="register.php" name="register" class="btn btn-primary form-control">Register</a>
+                    <a href="register.php" name="register" class="btn btn-primary form-control" style="border-radius: 25px;">Register</a>
 
-                    <a href='login.php' name="login" class="btn btn-outline-primary form-control mt-3">Login</a>
+                    <a href='login.php' name="login" class="btn btn-outline-primary form-control mt-3" style="border-radius: 25px;">Login</a>
                 </form>
             </div>
         </div>

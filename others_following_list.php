@@ -10,38 +10,43 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
         <style>
-        .following_list{
-            position: relative;
-            left: 360px;
-        }
+            .following_list{
+                position: relative;
+                left: 360px;
+            }
+            .user_icon:hover{
+                text-decoration: none;
+                opacity: 0.9;
+            }
         </style>
   </head>
 
-    <body>
+    <body style="background-color: rgb(21, 32, 42);">
         <div class="container-fluid mt-3">
             <div class="row">
                 <?php include 'user_menu.php'; ?>
 
                 <div class="following_list col-lg-6">
+                <h1 class="text-light">Following</h1>
                     <?php
                         $following_users_list = $SNS->displayFollowing($_GET['user_id']);
                         foreach($following_users_list as $row):
                     ?>
-                        <div class="card my-2">
-                            <div class="card-header border-bottom-0">
+                        <div class="card mt-3" style="background-color: rgb(25, 39, 52); border-color: rgb(55, 68, 76);">
+                            <div class="card-header">
                                 <div class="float-left">
                                     <?php if($row['user_id'] == $current_login_id){ ?>
-                                        <a href="my_profile.php">
+                                        <a href="my_profile.php" class="user_icon">
                                             <img src="uploads/<?php echo $row['icon'] ?>" alt="" class="rounded-circle mr-2" style="width: 50px; height: 50px;">
                                         </a>
-                                        <a href="my_profile.php">
+                                        <a href="my_profile.php" class="text-light">
                                             <?php echo $row['username'] ?>
                                         </a>
                                     <?php }else{ ?>
-                                        <a href="others_profile.php?user_id=<?php echo $row['user_id'] ?>">
+                                        <a href="others_profile.php?user_id=<?php echo $row['user_id'] ?>" class="user_icon">
                                             <img src="uploads/<?php echo $row['icon'] ?>" alt="" class="rounded-circle mr-2" style="width: 50px; height: 50px;">
                                         </a>
-                                        <a href="others_profile.php?user_id=<?php echo $row['user_id'] ?>">
+                                        <a href="others_profile.php?user_id=<?php echo $row['user_id'] ?>" class="text-light">
                                             <?php echo $row['username'] ?>
                                         </a>
                                     <?php } ?>
@@ -55,7 +60,7 @@
                                         <form action="action.php" method="post">
                                             <input type="hidden" name="user_id" value="<?php echo $_SESSION['login_id'] ?>">
                                             <input type="hidden" name="followed_user_id" value="<?php echo $row['user_id'] ?>">
-                                            <input type="hidden" name="current_user_id" value="<?php $_GET['user_id'] ?>">
+                                            <input type="hidden" name="current_user_id" value="<?php echo $_GET['user_id'] ?>">
                                             <button type="submit" name="follow_in_others_following_list" class="btn btn-outline-primary" style="border-radius: 25px;">Follow</button>
                                         </form>
                                     </div>
@@ -64,7 +69,7 @@
                                         <form action="action.php" method="post">
                                             <input type="hidden" name="user_id" value="<?php echo $_SESSION['login_id'] ?>">
                                             <input type="hidden" name="followed_user_id" value="<?php echo $row['user_id'] ?>">
-                                            <input type="hidden" name="current_user_id" value="<?php $_GET['user_id'] ?>">
+                                            <input type="hidden" name="current_user_id" value="<?php echo $_GET['user_id'] ?>">
                                             <button type="submit" name="unfollow_in_others_following_list" class="btn btn-outline-primary" style="border-radius: 25px;">Unfollow</button>
                                         </form>
                                     </div>
